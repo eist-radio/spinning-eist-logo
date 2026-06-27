@@ -178,7 +178,6 @@ scene.add(word);
 let curX = -totalW / 2;
 for (let li = 0; li < LETTERS.length; li++) {
   const { char, lower } = LETTERS[li];
-  // yOff: é and s are shifted DOWN (negative Y), i and t stay at 0
   const yOff = lower ? -LOWER_AMT : 0;
   const shapes = charShapes(char, FONT_SIZE, curX, yOff);
   const geo = new THREE.ExtrudeGeometry(shapes, {
@@ -190,9 +189,8 @@ for (let li = 0; li < LETTERS.length; li++) {
   curX += advance(char, FONT_SIZE) + LETTER_GAP;
 }
 
-// Vertically centre the group: halfway between the top of i/t and bottom of é/s
-// i/t top ≈ +capH/2 above word.y; é/s bottom ≈ -LOWER_AMT below word.y
-// We shift word.y so the visual midpoint is at origin
+
+// Vertically centre the group
 word.position.y = -(capH / 2) + (LOWER_AMT / 2) - 0.05;
 
 // ── Interaction & physics ──────────────────────────────────────────────────
@@ -239,6 +237,7 @@ function animate() {
   if (Math.abs(spinY) < AUTO_SPEED) spinY = AUTO_SPEED;
   word.rotation.y += spinY;
   word.rotation.x += spinX;
+
   renderer.render(scene, camera);
 }
 animate();

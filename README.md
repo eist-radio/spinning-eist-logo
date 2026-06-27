@@ -1,2 +1,1 @@
-# spinning-eist-logo
-# spinning-eist-logo
+# Spinning éist logo thing
